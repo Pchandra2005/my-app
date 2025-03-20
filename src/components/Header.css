@@ -1,9 +1,5 @@
-
-.App-Header-row{
+.App-Header-Row{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #adcff1;
-    border-bottom: 1px solid #e9ecef;
-}
+    justify-content: space-between;    
+    background-color: orange;
+} 
