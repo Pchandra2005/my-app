@@ -1,5 +1,5 @@
 {
-  "homepage": "https://srujana345.github.io/react-mystore-a",
+  "homepage": "https://Pchandra2005.github.io/react-mystore-a",
   "name": "react-mystore-a",
   "version": "0.1.0",
   "private": true,
@@ -42,5 +42,10 @@
   },
   "devDependencies": {
     "gh-pages": "^6.3.0"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
