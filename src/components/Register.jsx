@@ -6,7 +6,7 @@ export default function Register() {
   const[detail,setDetail] = useState({});
   const handleSubmit = () => {
     const userExist = details.find(
-      (value) => value.name == detail.name || value.email == detail.name
+      (value) => value.email == detail.email
     );
     if(userExist){
       alert("user already exists");
@@ -15,8 +15,8 @@ export default function Register() {
       setDetails([...details,detail]);
     }
   }
-  const handleDelete = (name) =>{
-    setDetails(details.filter((value) => value.name != name))
+  const handleDelete = (email) =>{
+    setDetails(details.filter((value) => value.email != email))
   }
   return (
   // <div>
@@ -59,10 +59,11 @@ export default function Register() {
           <button onClick={handleSubmit}>Submit</button>
         </div>
         <ol className="App-Box">
+          <h3>Userlist</h3>
           {details.map((value, index) => (
             <li key={index}>
               {value.name}|{value.email}|{value.password}-
-              <button onClick={() => handleDelete(value.name)}>Delete</button>
+              <button onClick={() => handleDelete(value.email)}>Delete</button>
              </li>
           ))}
         </ol>
