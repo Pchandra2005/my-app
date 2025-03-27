@@ -1,80 +1,85 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import "./Register.css"
+import { useState,useRef } from "react";
+import "./Register.css";
 export default function Register() {
-  const[details,setDetails] = useState([]);
-  const[detail,setDetail] = useState({});
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
+  const [msg, setMsg] = useState("");
+  const txtRef = useRef();
   const handleSubmit = () => {
-    const userExist = details.find(
-      (value) => value.email === detail.email
-    );
-    if(userExist){
-      alert("user already exists");
+    const found = users.find((value) => value.email === user.email);
+    if (found) {
+      setMsg("User already exists");
+        txtRef.current.style.color = "red";
+    } else {
+      setMsg();
+      setUsers([...users, user]);
+      setUser({ ...user, name: "", email: "", password: "" });
     }
-    else{
-      setDetails([...details,detail]);
-      // setDetail({name:'',email:'',password:''})
-      setDetail({...detail,name:"",email:"",password:""}); 
-    }
-  }
-  const handleDelete = (email) =>{
-    setDetails(details.filter((value) => value.email !== email))
-  }
+  };
+  const handleDelete = (email) => {
+    setUsers(users.filter((value) => value.email !== email));
+  };
   return (
-  // <div>
-  //   <h3>Register Form</h3>
-  //   <p>
-  //     <input type="text" placeholder="Enter Name"></input></p>
-  //   <p><input type="text" placeholder="Email Address"></input></p>
-  //   <p><input type="passsword" placeholder="New Password"></input></p>
-  //   <p><button onClick={}>Submit</button></p>
-  //   <p><Link to="../login">Already a member? Login here!</Link></p>
-  //   </div>
-  <div>
-      {/* <h3>Registration Form</h3> */}
-      <div className="App-Row">
-        <div className="App-Box">
-          <h2>Registration Form </h2>
-          <p>
-            <input
-              type="text"
-              value = {detail.name}
-              placeholder="Enter Name"
-              onChange={(e) => setDetail({ ...detail, name: e.target.value })}
-            ></input>
-          </p>
-          <p>
-            <input
-              type="text"
-              value = {detail.email}
-              placeholder="Enter email"
-              onChange={(e) =>
-                setDetail({ ...detail, email: e.target.value })
-              }
-            ></input>
-          </p>
-          <p>
-            <input
-              type="password"
-              value = {detail.password}
-              placeholder="Enter Password"
-              onChange={(e) => setDetail({ ...detail, password: e.target.value })}
-            ></input>
-          </p>
+    <div className="App-Register-Row">
+      <div className="App-Register-Box">
+        <h3>Registration Form</h3>
+        <p ref={txtRef}>{msg}</p>
+        <p>
+          <input
+            type="text"
+            value={user.name}
+            placeholder="Enter Name"
+            onChange={(e) => setUser({ ...user, name: e.target.value })}
+          ></input>
+        </p>
+        <p>
+          <input
+            type="text"
+            value={user.email}
+            placeholder="Email address"
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
+          ></input>
+        </p>
+        <p>
+          <input
+            type="password"
+            value={user.password}
+            placeholder="New password"
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+          ></input>
+        </p>
+        <p>
           <button onClick={handleSubmit}>Submit</button>
-        </div>
-        <ol className="App-Box">
-          <h3>Userlist</h3>
-          {details.map((value, index) => (
-            <li key={index}>
-              {value.name}|{value.email}|{value.password}-
-              <button onClick={() => handleDelete(value.email)}>Delete</button>
-             </li>
-          ))}
-        </ol>
-        {/* <p><Link to="../login">Already a member? Login here!</Link></p> */}
+        </p>
+        <p>
+          <Link to="../login">Already a member? Login here!</Link>
+        </p>
       </div>
-      <p><Link to="../login">Already a member? Login here!</Link></p>
+      <div className="App-Register-Box">
+        <h3>Userlist</h3>
+        <table className="App-Register-Table">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th></th>
+          </tr>
+          {users.map((value, index) => (
+            <tr key={index}>
+              <td>{value.name}</td>
+              <td>{value.email}</td>
+              <td>{value.password}</td>
+              <td>
+                <button onClick={() => handleDelete(value.email)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </table>
+      </div>
     </div>
-)
+  );
 }

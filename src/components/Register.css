@@ -1,17 +1,30 @@
-.App-Row{
+.App-Register-Row{
     display: flex;
     justify-content: center;
+    margin: 20px;
+    padding: 20px;
+}
+.App-Register-Box{
     margin: 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color:beige;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 20px;
 }
 
-.App-Box{
-    margin: 10px;
-    padding: 15px;
+.App-Register-Table{
+    /* border: 1px solid gray; */
+    margin: 5px;
+}
+.App-Register-Table td{
     border: 1px solid gray;
-    border-radius: 10px;
-    background-color: chocolate;
-    
+    padding: 5px;
+    margin:0px;
+}
+
+.App-Register-Table th{
+    border: 1px solid gray;
+    padding: 5px;
+    margin:0px;
+    background-color: gray;
+    color: white;
 }
