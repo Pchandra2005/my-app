@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useState,useRef } from "react";
+import { Link,useNavigate } from "react-router-dom";
+import { useState,useRef,useContext} from "react";
+import { appContext } from "../App";
 import "./Register.css";
 export default function Register() {
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  const {users,setUsers,user,setUser} = useContext(appContext);
   const [msg, setMsg] = useState("");
   const txtRef = useRef();
   const handleSubmit = () => {
@@ -15,8 +16,9 @@ export default function Register() {
     } else {
       setMsg();
       setUsers([...users, user]);
-      setUser({ ...user, name: "", email: "", password: "" });
+      // setUser({ ...user, name: "", email: "", password: "" });
     }
+    navigate("/products");
   };
   const handleDelete = (email) => {
     setUsers(users.filter((value) => value.email !== email));

@@ -7,10 +7,15 @@ import Cart from "./components/Cart";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {createContext,useState} from "react";
+export const appContext = createContext();
 function App() {
+    const [users, setUsers] = useState([]);
+    const [user, setUser] = useState({});
   return (
     <div>
       <BrowserRouter>
+      <appContext.Provider value={{users,setUsers,user,setUser}}>
         <Header />
         <Routes>
           <Route index element={<Products />}></Route>
@@ -20,6 +25,7 @@ function App() {
           <Route path="login" element={<Login />}></Route>
         </Routes>
         <Footer />
+        </appContext.Provider>
       </BrowserRouter>
     </div>
   );
