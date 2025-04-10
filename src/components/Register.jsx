@@ -1,33 +1,33 @@
 import React from "react";
-import { Link,useNavigate } from "react-router-dom";
-import { useState,useRef,useContext} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useRef, useContext } from "react";
 import { appContext } from "../App";
 import "./Register.css";
 export default function Register() {
-  const navigate = useNavigate();
-  const {users,setUsers,user,setUser} = useContext(appContext);
-  const [msg, setMsg] = useState("");
-  const txtRef = useRef();
+  const { users, setUsers, user, setUser } = useContext(appContext);
+  const [msg, setMsg] = useState();
+  const msgRef = useRef();
+  const Navigate = useNavigate()
   const handleSubmit = () => {
     const found = users.find((value) => value.email === user.email);
     if (found) {
       setMsg("User already exists");
-        txtRef.current.style.color = "red";
+      msgRef.current.style.color = "red";
     } else {
       setMsg();
       setUsers([...users, user]);
-      // setUser({ ...user, name: "", email: "", password: "" });
+      //setUser({ ...user, name: "", email: "", password: "" });
+      Navigate("/")
     }
-    navigate("/products");
   };
   const handleDelete = (email) => {
-    setUsers(users.filter((value) => value.email !== email));
+    setUsers(users.filter((value) => value.email != email));
   };
   return (
     <div className="App-Register-Row">
       <div className="App-Register-Box">
         <h3>Registration Form</h3>
-        <p ref={txtRef}>{msg}</p>
+        <p ref={msgRef}>{msg}</p>
         <p>
           <input
             type="text"

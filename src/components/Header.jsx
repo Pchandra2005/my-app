@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { appContext } from "../App";
 export default function Header() {
-  const { user, setUser } = useContext(appContext);
+  const { user, setUser, cart } = useContext(appContext);
   return (
     <div className="App-Header-Row">
       <h1>My React Store</h1>
@@ -12,9 +12,9 @@ export default function Header() {
           Home
         </Link>
         <Link to="cart" className="App-Header-Link">
-          Cart
+          Cart({Object.keys(cart).length})
         </Link>
-        {user.name === "" ? (
+        {user.email === "" ? (
           <Link to="login" className="App-Header-Link">
             Login
           </Link>
@@ -23,7 +23,7 @@ export default function Header() {
             to="login"
             className="App-Header-Link"
             onClick={() =>
-              setUser({ ...user, name: "" , email: "", password: "" })
+              setUser({ ...user, name: "", email: "", password: "" })
             }
           >
             Logout
